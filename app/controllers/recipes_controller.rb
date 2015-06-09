@@ -17,6 +17,13 @@ class RecipesController < ApplicationController
     end
   end
 
+  def destroy
+    recipe = Recipe.find(params[:id])
+    recipe.destroy!
+
+    render nothing: true, status: 204
+  end
+
 
   def recipe_params
     params.require(:recipe).permit(:name, :rating)
