@@ -13,6 +13,7 @@ class CreatingRecipeTest < ActionDispatch::IntegrationTest
     recipe = json(response.body)
     assert_equal recipe_url(recipe[:id]), response.location
 
+    assert_equal Mime::JSON, response.content_type
     assert_equal 'Egg drop soup', recipe[:name]
     assert_equal 5, recipe[:rating].to_i
   end
