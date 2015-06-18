@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  resources :recipes
+  namespace :api do
+    resources :recipes
+  end
+
+
+  root to: 'home#show'
 end
