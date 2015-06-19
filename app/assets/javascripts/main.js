@@ -38,11 +38,6 @@ App.RecipesEditRoute = Ember.Route.extend({
   }
 });
 
-
-App.RecipesController = Ember.ArrayController.extend({
-  sortProperties: ['name'],
-});
-
 App.RecipeRoute = Ember.Route.extend({
   renderTemplate: function(){
     this.render('recipe',
@@ -56,7 +51,12 @@ App.RecipeRoute = Ember.Route.extend({
   }
 });
 
+App.RecipesController = Ember.ArrayController.extend({
+  sortProperties: ['name'],
+});
+
 App.RecipeController = Ember.Controller.extend({
+  ratings: [5,4,3,2,1],
   actions: {
     removeRecipe: function(){
       var recipe = this.get('model');
@@ -65,13 +65,7 @@ App.RecipeController = Ember.Controller.extend({
       recipe.save().then(function(){
         controller.transitionToRoute('index');
       });
-    }
-  }
-});
-
-App.RecipesNewController = Ember.Controller.extend({
-  ratings: [5,4,3,2,1],
-  actions: {
+    },
     createRecipe: function() {
       var controller = this;
       this.get('model').save().then(function() {
@@ -80,17 +74,9 @@ App.RecipesNewController = Ember.Controller.extend({
     }
   }
 });
-
-App.RecipesEditController = Ember.Controller.extend({
-  ratings: [5,4,3,2,1],
-  actions: {
-    createRecipe: function() {
-      var controller = this;
-      this.get('model').save().then(function() {
-        controller.transitionToRoute('index');
-      });
-    }
-  }
+App.RecipesNewController = App.RecipeController.extend({
+});
+App.RecipesEditController = App.RecipeController.extend({
 });
 
 
