@@ -16,6 +16,7 @@
 </script>
 
 <script type="text/x-handlebars" data-template-name="recipes">
+  {{#link-to 'recipes.new' class='btn btn-primary'}}Add a Recipe{{/link-to}}
   {{#each}}
     {{recipe-details recipe=this tag='li' class='row'}}
   {{/each}}
@@ -45,11 +46,12 @@
 
 <script type="text/x-handlebars" data-template-name="recipes/new">
   <ol class="breadcrumb">
-    <li>{{#link-to 'index'}}Recipes{{/link-to}}</li>
     {{#if model.name}}
+    <li>{{#link-to 'index'}}Recipes{{/link-to}}</li>
     <li>{{#link-to 'recipe' model}}{{model.name}}{{/link-to}}</li>
     <li class='active'>Edit</li>
     {{else}}
+    <li>{{#link-to 'index'}}Recipes{{/link-to}}</li>
     <li class='active'>New</li>
     {{/if}}
   </ol>
