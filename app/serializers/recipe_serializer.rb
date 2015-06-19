@@ -1,3 +1,3 @@
 class RecipeSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name, :description, :rating
 end

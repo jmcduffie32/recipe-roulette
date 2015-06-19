@@ -65,7 +65,8 @@ App.RecipesEditController = Ember.Controller.extend({
     }
   }
 });
-App.ApplicationAdapter = DS.FixtureAdapter.extend({
+App.ApplicationAdapter = DS.ActiveModelAdapter.extend({
+  namespace: 'api'
 });
 
 App.Recipe = DS.Model.extend({
@@ -73,26 +74,3 @@ App.Recipe = DS.Model.extend({
   description: DS.attr(),
   rating: DS.attr('number')
 });
-
-App.Recipe.FIXTURES = [
-  {
-    id: 1,
-    name: 'Egg Drop Soup',
-    description: 'Drop egg in soup',
-    rating: 5
-  },
-  {
-    id: 2,
-    name: 'Pizza',
-    description: 'Cheesy Pinapply goodness',
-    rating: 4
-  },
-  {
-    id: 3,
-    name: 'Burritos',
-    description: "Burritos with lettuce, tofu, tomatos",
-    rating: 3
-  }
-
-];
-
