@@ -46,7 +46,12 @@
 <script type="text/x-handlebars" data-template-name="recipes/new">
   <ol class="breadcrumb">
     <li>{{#link-to 'index'}}Recipes{{/link-to}}</li>
+    {{#if model.name}}
+    <li>{{#link-to 'recipe' model}}{{model.name}}{{/link-to}}</li>
+    <li class='active'>Edit</li>
+    {{else}}
     <li class='active'>New</li>
+    {{/if}}
   </ol>
 
   <div class='row'>
