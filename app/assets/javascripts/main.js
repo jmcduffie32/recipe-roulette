@@ -4,7 +4,7 @@ App.Router.map(function() {
   // put your routes here
   this.resource('recipes', function(){
     this.route('new');
-    this.route('edit', {path: "/edit/:recipe_id" });
+    this.route('edit', {path: "/:recipe_id/edit" });
   });
   this.resource('recipe', {path: '/recipe/:recipe_id'}, function(){
   });
@@ -27,19 +27,46 @@ App.RecipesNewRoute = Ember.Route.extend({
 
 App.RecipesEditRoute = Ember.Route.extend({
   renderTemplate: function(){
-    this.render('recipes/new', 
+    this.render('recipes/new',
                 {
                  into: 'application',
                  controller: 'recipesEdit'
                 });
   },
   model: function(params) {
-    return this.store.find('recipe', 1);
+    return this.store.find('recipe', params.recipe_id);
   }
 });
 
+
 App.RecipesController = Ember.ArrayController.extend({
-  sortProperties: ['name']
+  sortProperties: ['name'],
+});
+
+App.RecipeRoute = Ember.Route.extend({
+  renderTemplate: function(){
+    this.render('recipe',
+                {
+                 into: 'application',
+                 controller: 'recipe'
+                });
+  },
+  model: function(params) {
+    return this.store.find('recipe', params.recipe_id);
+  }
+});
+
+App.RecipeController = Ember.Controller.extend({
+  actions: {
+    removeRecipe: function(){
+      var recipe = this.get('model');
+      var controller = this;
+      recipe.deleteRecord();
+      recipe.save().then(function(){
+        controller.transitionToRoute('index');
+      });
+    }
+  }
 });
 
 App.RecipesNewController = Ember.Controller.extend({
@@ -65,6 +92,8 @@ App.RecipesEditController = Ember.Controller.extend({
     }
   }
 });
+
+
 App.ApplicationAdapter = DS.ActiveModelAdapter.extend({
   namespace: 'api'
 });

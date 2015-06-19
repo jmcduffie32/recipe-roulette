@@ -9,6 +9,11 @@ module Api
       render json: recipes, status: 200
     end
 
+    def show
+      recipe = Recipe.find(params[:id])
+      render json: recipe, status: 200
+    end
+
     def create
       recipe = Recipe.new(recipe_params)
       if recipe.save

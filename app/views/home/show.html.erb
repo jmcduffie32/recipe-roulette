@@ -5,6 +5,7 @@
     {{outlet}}
   </div>
 </script>
+
 <script type="text/x-handlebars" data-template-name="index">
   <ol class="breadcrumb">
     <li class='active'>Recipes</li>
@@ -23,10 +24,11 @@
 <script type="text/x-handlebars" data-template-name="recipe">
   <ol class="breadcrumb">
     <li>{{#link-to 'index'}}Recipes{{/link-to}}</li>
-    <li class='active'>{{name}}</li>
+    <li class='active'>{{model.name}}</li>
   </ol>
-  <p>{{#link-to "recipes.edit" this }}Edit recipe{{/link-to}}</p>
-  {{recipe-details recipe=this tag='div' class='row'}}
+  <p>{{#link-to "recipes.edit" model }}Edit recipe{{/link-to}}</p>
+  <button {{action 'removeRecipe'}}> Delete Record </button>
+  {{recipe-details recipe=model tag='div' class='row'}}
 </script>
 
 <script type="text/x-handlebars" data-template-name="components/recipe-details">
