@@ -5,6 +5,7 @@ App.Router.map(function() {
   this.resource('recipes', function(){
     this.route('new');
     this.route('edit', {path: "/:recipe_id/edit" });
+    this.route('random', {path: "/random" });
   });
   this.resource('recipe', {path: '/recipe/:recipe_id'}, function(){
   });
@@ -12,7 +13,20 @@ App.Router.map(function() {
 
 App.IndexRoute = Ember.Route.extend({
   model: function() {
-    return this.store.findAll('recipe')
+    return this.store.findAll('recipe');
+  }
+});
+
+App.RecipesRandomRoute = Ember.Route.extend({
+  renderTemplate: function(){
+    this.render('recipes/random',
+                {
+                  into: 'application',
+                  controller: 'recipesRandom'
+                });
+  },
+  model: function(params) {
+    return this.store.find('recipe', {random: true});
   }
 });
 
@@ -29,8 +43,8 @@ App.RecipesEditRoute = Ember.Route.extend({
   renderTemplate: function(){
     this.render('recipes/new',
                 {
-                 into: 'application',
-                 controller: 'recipesEdit'
+                  into: 'application',
+                  controller: 'recipesEdit'
                 });
   },
   model: function(params) {
@@ -42,8 +56,8 @@ App.RecipeRoute = Ember.Route.extend({
   renderTemplate: function(){
     this.render('recipe',
                 {
-                 into: 'application',
-                 controller: 'recipe'
+                  into: 'application',
+                  controller: 'recipe'
                 });
   },
   model: function(params) {

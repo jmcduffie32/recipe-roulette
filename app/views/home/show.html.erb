@@ -1,6 +1,7 @@
 <script type="text/x-handlebars" data-template-name="application">
   <div class="container">
     <h1>Recipe Roulette</h1>
+    <%= params.inspect %>
 
     {{outlet}}
   </div>
@@ -21,6 +22,20 @@
     {{recipe-details recipe=this tag='li' class='row'}}
   {{/each}}
 </script>
+
+<script type="text/x-handlebars" data-template-name="recipes/random">
+  <ol class="breadcrumb">
+    <li class='active'>Recipes</li>
+  </ol>
+  <ul class="list-unstyled">
+    {{#link-to 'recipes.new' class='btn btn-primary'}}Add a Recipe{{/link-to}}
+    {{#link-to 'index' class='btn btn-primary'}}Back to the list{{/link-to}}
+    {{#each model}}
+      {{recipe-details recipe=this tag='li' class='row'}}
+    {{/each}}
+  </ul>
+</script>
+
 
 <script type="text/x-handlebars" data-template-name="recipe">
   <ol class="breadcrumb">

@@ -6,6 +6,9 @@ module Api
       if rating = params[:rating]
         recipes = recipes.where(rating: rating)
       end
+      if params[:random]
+        recipes = Recipe.order("RANDOM()").limit(5)
+      end
       render json: recipes, status: 200
     end
 
